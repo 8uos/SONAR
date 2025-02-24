@@ -435,7 +435,8 @@ class SpeechToEmbeddingModelPipeline(SpeechModelPipelineInterface):
                 lambda fbank: extract_sequence_batch(fbank, self.device),
                 selector="fbank",
             )
-            .map(lambda data: self.model(data["fbank"]).sentence_embeddings)
+            # .map(lambda data: self.model(data["fbank"]).sentence_embeddings)
+            .map(lambda data: self.model(data["fbank"]).encoded_seqs)
         )
 
         return pipeline
